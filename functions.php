@@ -86,3 +86,32 @@ function calculate_handler() {
     wp_send_json($result);
 }
 add_action('wp_ajax_calculate', 'calculate_handler');
+
+
+function register_acf_block_types() {
+
+  // Регистрация Hero Slider блока
+  acf_register_block_type(array(
+      'name'              => 'hero-slider',
+      'title'             => __('Hero Slider'),
+      'description'       => __('A custom hero slider block.'),
+      'render_template'   => 'blocks/hero-slider/hero-slider.php',
+      'category'          => 'formatting',
+      'icon'              => 'slides',
+      'keywords'          => array('slider', 'hero'),
+  ));
+
+  // Регистрация Impressions блока
+  acf_register_block_type(array(
+      'name'              => 'impressions',
+      'title'             => __('Impressions'),
+      'description'       => __('A custom impressions block.'),
+      'render_template'   => 'blocks/impressions/impressions.php',
+      'category'          => 'formatting',
+      'icon'              => 'admin-comments',
+      'keywords'          => array('impressions'),
+  ));
+
+}
+
+add_action('acf/init', 'register_acf_block_types');
